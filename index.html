@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pan Turek Poznań | Prawdziwa Kuchnia Turecka</title>
+    <style>
+        :root {
+            --bg-color: #faf7f2;
+            --bg-card: #ffffff;
+            --text-main: #2c1e16;
+            --primary: #a72828;
+            --primary-hover: #8b1e1e;
+            --accent: #d4af37;
+            --fb-color: #1877F2;
+            --shadow: 0 10px 30px rgba(44, 30, 22, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.7; overflow-x: hidden; }
+        h1, h2, h3, h4, .logo { font-family: 'Georgia', serif; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+        /* Nawigacja */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 5vw; background: rgba(250, 247, 242, 0.95); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 15px rgba(0,0,0,0.05); backdrop-filter: blur(8px); }
+        .logo { font-size: 26px; font-weight: bold; color: var(--primary); display: flex; align-items: center; gap: 8px; text-transform: uppercase; }
+        
+        nav ul { display: flex; list-style: none; gap: 25px; align-items: center; }
+        nav ul li a { text-decoration: none; color: var(--text-main); font-size: 14px; text-transform: uppercase; font-weight: 600; transition: 0.3s; }
+        nav ul li a:hover { color: var(--primary); }
+
+        /* Pływający Przycisk FB */
+        .floating-fb {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--fb-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(24, 119, 242, 0.4);
+            z-index: 999;
+            transition: 0.3s;
+        }
+        .floating-fb:hover { transform: scale(1.1) rotate(5deg); }
+        .floating-fb svg { width: 30px; height: 30px; fill: white; }
+
+        .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; }
+        .hamburger span { width: 30px; height: 3px; background-color: var(--primary); }
+
+        /* Przyciski */
+        .btn { display: inline-block; padding: 14px 35px; background-color: var(--primary); color: #fff !important; text-decoration: none; font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; transition: 0.3s; border: none; }
+        .btn:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
+        
+        /* Hero */
+        .hero { 
+            height: 85vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(44, 30, 22, 0.7), rgba(44, 30, 22, 0.85)), 
+                        url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=2000') center/cover; 
+        }
+        .hero-content h1 { font-size: 58px; color: #fff; margin-bottom: 20px; }
+        .hero-content p { font-size: 19px; color: #e0d8d3; margin-bottom: 40px; }
+
+        /* Sekcja FB - Bardzo widoczna */
+        .fb-section { background: linear-gradient(135deg, #1877F2 0%, #0a52a1 100%); color: white; padding: 80px 5vw; text-align: center; border-radius: 0; margin-top: 40px; }
+        .fb-section h2 { color: white; font-size: 36px; margin-bottom: 15px; }
+        .fb-section p { font-size: 18px; margin-bottom: 30px; opacity: 0.9; }
+        .fb-big-btn { background: white; color: var(--fb-color) !important; padding: 18px 40px; border-radius: 50px; font-weight: 800; display: inline-flex; align-items: center; gap: 15px; text-transform: uppercase; box-shadow: 0 10px 20px rgba(0,0,0,0.2); transition: 0.3s; text-decoration: none; }
+        .fb-big-btn:hover { transform: scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+
+        /* Sekcje */
+        section { padding: 90px 5vw; max-width: 1200px; margin: 0 auto; }
+        h2 { font-size: 40px; text-align: center; margin-bottom: 20px; color: var(--text-main); }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .feature-card { background: var(--bg-card); padding: 40px 30px; border-radius: 8px; box-shadow: var(--shadow); text-align: center; border-bottom: 3px solid var(--accent); }
+
+        /* Opinie */
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .review-card { background: var(--bg-card); padding: 40px; border-radius: 8px; box-shadow: var(--shadow); border-left: 4px solid var(--primary); }
+
+        /* Stopka */
+        footer { background: #1a120d; color: #d0c8c4; padding: 70px 5vw 30px; border-top: 5px solid var(--primary); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .footer-col h4 { font-size: 20px; margin-bottom: 25px; color: var(--accent); }
+        .footer-col a { color: #fff; text-decoration: none; font-weight: bold; }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            nav ul { position: fixed; top: 0; right: -100%; width: 85%; height: 100vh; background: var(--bg-color); flex-direction: column; justify-content: center; transition: 0.4s ease; }
+            nav ul.active { right: 0; }
+            .hero-content h1 { font-size: 40px; }
+            .fb-section h2 { font-size: 28px; }
+            .floating-fb { width: 50px; height: 50px; bottom: 20px; right: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://www.facebook.com/share/18gdPrnnKt/?mibextid=wwXIfr" target="_blank" class="floating-fb" title="Nasz Facebook">
+        <svg viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
+    </a>
+
+    <nav>
+        <div class="logo">Pan Turek <span>Poznań</span></div>
+        <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+        <ul id="navMenu">
+            <li><a href="#tradycja" onclick="toggleMenu()">Tradycja</a></li>
+            <li><a href="#opinie" onclick="toggleMenu()">Opinie</a></li>
+            <li><a href="#kontakt" onclick="toggleMenu()">Kontakt</a></li>
+            <li><a href="https://www.facebook.com/share/18gdPrnnKt/?mibextid=wwXIfr" target="_blank" style="color: var(--fb-color);">Facebook</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="badge">Autentyczna Restauracja Turecka</div>
+            <h1>Smak Prawdziwej <br>Turcji w Poznaniu.</h1>
+            <p>Z miłości i szacunku do prawdziwej kuchni tureckiej. Świeże mięso z grilla i legendarna gościnność.</p>
+            <a href="#kontakt" class="btn">Gdzie nas znaleźć?</a>
+        </div>
+    </header>
+
+    <section id="tradycja">
+        <h2>Nasza <span>filozofia</span></h2>
+        <div class="features-grid">
+            <div class="feature-card"><h4>Prawdziwa Obsługa</h4><p>U nas kelner zbierze zamówienie przy stoliku. Od progu powita Cię turecka gościnność.</p></div>
+            <div class="feature-card"><h4>Świeżość</h4><p>Mięso przygotowujemy codziennie na miejscu, pieczone na żywym ogniu.</p></div>
+            <div class="feature-card"><h4>Własne Wypieki</h4><p>Wypiekamy własne pieczywo i lawasze, a na deser serwujemy domową baklavę.</p></div>
+        </div>
+    </section>
+
+    <div class="fb-section">
+        <h2>Bądź z nami na bieżąco!</h2>
+        <p>Codzienne nowości z kuchni, zdjęcia naszych dań i informacje o promocjach znajdziesz na naszym profilu.</p>
+        <a href="https://www.facebook.com/share/18gdPrnnKt/?mibextid=wwXIfr" target="_blank" class="fb-big-btn">
+            <svg style="width:24px; fill:#1877F2;" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
+            Obserwuj nas na Facebooku
+        </a>
+    </div>
+
+    <section id="opinie">
+        <h2>Co mówią <span>nasi Goście?</span></h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Od progu tureckie powitanie i zaprowadzenie do stolika. Miło, czysto, dużo przestrzeni. Jedzonko pierwsza klasa..."</p>
+                <div class="review-author">— Globtrotter</div>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Wyróżnia ich wspaniała obsługa - siadamy do stołu i kelner zbiera zamówienia. W cenie posiłku turecka herbatka."</p>
+                <div class="review-author">— Rainbow Dash</div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="kontakt">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Pan Turek Poznań</h4>
+                <p>📍 ul. Wielka 22/4, 61-775 Poznań</p>
+            </div>
+            <div class="footer-col">
+                <h4>Kontakt</h4>
+                <p>📞 <a href="tel:brak" style="color: var(--accent);">[NUMER TELEFONU]</a></p>
+                <p>✉️ panturek.kontakt@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
